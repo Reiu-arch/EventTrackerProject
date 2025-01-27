@@ -3,6 +3,8 @@ package com.skilldistillery.bluepix.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -31,6 +33,7 @@ public class Post {
 	@Column(name = "last_update")
 	private LocalDateTime lastUpdate;
 	
+	@JsonIgnoreProperties({"posts"})
 	@ManyToOne
 	@JoinColumn(name="page_user_id")
 	private PageUser pageUser;
