@@ -1,6 +1,7 @@
 package com.skilldistillery.bluepix.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -11,6 +12,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -39,6 +41,9 @@ public class PageUser {
 	@Column(name = "last_update")
 	@UpdateTimestamp
 	private LocalDateTime lastUpdate;
+	
+	@OneToMany(mappedBy="pageUser")
+	private List<Post> posts;
 
 	public PageUser() {
 		super();
@@ -50,6 +55,14 @@ public class PageUser {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public List<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	public String getName() {
@@ -106,6 +119,22 @@ public class PageUser {
 
 	public void setLastUpdate(LocalDateTime lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}
+	
+	
+
+	public PageUser(int id, String name, String email, String password, String biography, String pictureUrl,
+			LocalDateTime createDate, LocalDateTime lastUpdate, List<Post> posts) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.biography = biography;
+		this.pictureUrl = pictureUrl;
+		this.createDate = createDate;
+		this.lastUpdate = lastUpdate;
+		this.posts = posts;
 	}
 
 	@Override

@@ -39,14 +39,28 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public PageUser update(int userId, PageUser pageUser) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<PageUser> userOpt = userRepo.findById(userId);
+		PageUser updateUser = null;
+		if(userOpt.isPresent()) {
+			updateUser = userOpt.get();
+			updateUser.setName(pageUser.getName());
+			updateUser.setPassword(pageUser.getPassword());
+			updateUser.setEmail(pageUser.getEmail());
+			updateUser.setBiography(pageUser.getBiography());
+			updateUser.setPictureUrl(pageUser.getPictureUrl());
+			userRepo.saveAndFlush(updateUser);
+		}
+		return updateUser;
 	}
 
 	@Override
 	public boolean delete(int userId) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean deleted = false;
+		if(userRepo.existsById(userId)) {
+			userRepo.deleteById(userId);
+			deleted = true;
+		}
+		return deleted;
 	}
 
 }
