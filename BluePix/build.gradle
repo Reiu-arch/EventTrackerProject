@@ -18,6 +18,13 @@ repositories {
 	mavenCentral()
 }
 
+war {
+  // Gradle will replace the variable archivesBaseName
+  // with our app name, as defined in settings.gradle
+  archiveFileName = "${rootProject.name}.war"
+  destinationDirectory = file("../")     // Project workspace directory
+}
+
 dependencies {
 	implementation project(':BluePixJPA')
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'

@@ -6,4 +6,6 @@ import com.skilldistillery.bluepix.entities.PageUser;
 
 public interface UserRepository extends JpaRepository<PageUser, Integer> {
 
+	PageUser findByNameAndPassword(String username, String password);
+
 }

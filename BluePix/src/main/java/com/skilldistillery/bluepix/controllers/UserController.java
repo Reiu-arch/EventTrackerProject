@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,6 +18,7 @@ import com.skilldistillery.bluepix.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("api")
@@ -85,5 +87,35 @@ public class UserController {
 			e.printStackTrace();
 			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);// 400
 		}
+	}
+	
+	//was not @RequestBody String name, @RequestBody String password
+	@PostMapping("login")
+	public PageUser login( @RequestAttribute(name = "name") String name, @RequestAttribute(name = "password") String password, HttpSession session, HttpServletResponse resp, HttpServletRequest req) {
+		//session.getAtt doest seem to be able to get a specified field from the JSON POST request
+		//How am i able to get raw attribute information from JSON for testing?
+		
+		
+//		String name = (String) session.getAttribute("name");
+//		String password = (String) session.getAttribute("password");
+		PageUser user = userService.authenticateUser(name, password);
+		
+		
+		//so far both the request body and getAtt dont seem to show up with anything
+		System.out.println(user);
+		System.out.println(name);
+		System.out.println(password);
+		try {
+			if(user != null) {
+				session.setAttribute("LoggedInUser", user);
+				resp.setStatus(HttpServletResponse.SC_OK);//200
+				resp.setHeader("Location", req.getRequestURL().append("users/").append(user.getId()).toString());//sends to their users/id
+			}
+			resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+		} catch (Exception e) {
+			e.printStackTrace();
+			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);//400
+		}
+		return user;
 	}
 }

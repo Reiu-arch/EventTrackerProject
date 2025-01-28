@@ -11,5 +11,5 @@ public interface UserService {
 	PageUser create(PageUser newUser);
 	PageUser update(int userId, PageUser pageUser);
 	boolean delete(int userId);
-	
+	PageUser authenticateUser(String username, String password);
 }

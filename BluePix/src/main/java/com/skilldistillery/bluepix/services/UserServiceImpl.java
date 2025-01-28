@@ -63,4 +63,17 @@ public class UserServiceImpl implements UserService {
 		return deleted;
 	}
 
+	@Override
+	public PageUser authenticateUser(String username, String password) {
+		PageUser authenticatedUser = null;
+		
+		try {
+			authenticatedUser = userRepo.findByNameAndPassword(username, password);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.err.println("Invalid user :"+ username);
+		}
+		return authenticatedUser;
+	}
+
 }
