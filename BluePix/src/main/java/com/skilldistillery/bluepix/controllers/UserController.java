@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -91,13 +90,13 @@ public class UserController {
 	
 	//was not @RequestBody String name, @RequestBody String password
 	@PostMapping("login")
-	public PageUser login( @RequestAttribute(name = "name") String name, @RequestAttribute(name = "password") String password, HttpSession session, HttpServletResponse resp, HttpServletRequest req) {
+	public PageUser login(@RequestBody PageUser pageUser, HttpSession session, HttpServletResponse resp, HttpServletRequest req) {
 		//session.getAtt doest seem to be able to get a specified field from the JSON POST request
 		//How am i able to get raw attribute information from JSON for testing?
 		
 		
-//		String name = (String) session.getAttribute("name");
-//		String password = (String) session.getAttribute("password");
+		String name = pageUser.getName();
+		String password = pageUser.getPassword();
 		PageUser user = userService.authenticateUser(name, password);
 		
 		
@@ -111,7 +110,9 @@ public class UserController {
 				resp.setStatus(HttpServletResponse.SC_OK);//200
 				resp.setHeader("Location", req.getRequestURL().append("users/").append(user.getId()).toString());//sends to their users/id
 			}
-			resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			else {
+				resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);//400
