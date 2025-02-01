@@ -6,8 +6,10 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.skilldistillery.bluepix.entities.PageUser;
 import com.skilldistillery.bluepix.entities.Post;
 import com.skilldistillery.bluepix.repositories.PostRepository;
+import com.skilldistillery.bluepix.repositories.UserRepository;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -15,6 +17,10 @@ public class PostServiceImpl implements PostService {
 	@Autowired
 	private PostRepository postRepo;
 
+	@Autowired
+	private UserRepository userRepo;
+	
+	
 	@Override
 	public List<Post> findAll() {
 		
@@ -34,6 +40,8 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public Post create(Post newPost, int userId) {
+		PageUser user = userRepo.findById(userId).orElse(null);
+		newPost.setPageUser(user);
 		return postRepo.saveAndFlush(newPost);
 	}
 

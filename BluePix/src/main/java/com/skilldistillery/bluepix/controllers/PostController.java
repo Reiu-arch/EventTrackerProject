@@ -40,10 +40,15 @@ public class PostController {
 	}
 	
 	@PostMapping(path = { "posts", "posts/" })
-	public Post createPost(@RequestBody Post post, HttpServletResponse resp, HttpServletRequest req, HttpSession session, PageUser user) {
+	public Post createPost(@RequestBody Post post, HttpServletResponse resp, HttpServletRequest req, HttpSession session) {
 		try {
-			PageUser postingUser = (PageUser)session.getAttribute("LogginInUser");
-			post = postService.create(post, 0);
+			PageUser postingUser = (PageUser)session.getAttribute("LoggedInUser");
+			System.out.println("=======================================================");
+			System.out.println("=======================================================");
+			System.out.println(postingUser);
+			System.out.println("=======================================================");
+			System.out.println("=======================================================");
+			post = postService.create(post, postingUser.getId());
 			resp.setStatus(HttpServletResponse.SC_CREATED);// 201
 			resp.setHeader("Location", req.getRequestURL().append("/").append(post.getId()).toString());
 		} catch (Exception e) {

@@ -3,6 +3,9 @@ package com.skilldistillery.bluepix.entities;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -28,9 +31,11 @@ public class Post {
 	private String imageUrl;
 	
 	@Column(name = "create_date")
+	@CreationTimestamp
 	private LocalDateTime createdDate;
 	
 	@Column(name = "last_update")
+	@UpdateTimestamp
 	private LocalDateTime lastUpdate;
 	
 	@JsonIgnoreProperties({"posts"})

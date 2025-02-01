@@ -89,34 +89,39 @@ public class UserController {
 	}
 	
 	//was not @RequestBody String name, @RequestBody String password
+	//sluthing around and i was able to find that you can load a dummy Object with the required information for a login (ie Uname & password)
 	@PostMapping("login")
 	public PageUser login(@RequestBody PageUser pageUser, HttpSession session, HttpServletResponse resp, HttpServletRequest req) {
 		//session.getAtt doest seem to be able to get a specified field from the JSON POST request
 		//How am i able to get raw attribute information from JSON for testing?
-		
-		
-		String name = pageUser.getName();
-		String password = pageUser.getPassword();
-		PageUser user = userService.authenticateUser(name, password);
-		
-		
-		//so far both the request body and getAtt dont seem to show up with anything
-		System.out.println(user);
-		System.out.println(name);
-		System.out.println(password);
-		try {
-			if(user != null) {
-				session.setAttribute("LoggedInUser", user);
-				resp.setStatus(HttpServletResponse.SC_OK);//200
-				resp.setHeader("Location", req.getRequestURL().append("users/").append(user.getId()).toString());//sends to their users/id
-			}
-			else {
-				resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			resp.setStatus(HttpServletResponse.SC_BAD_REQUEST);//400
-		}
-		return user;
+	    String name = pageUser.getName();
+	    String password = pageUser.getPassword();
+	    
+	    //so far both the request body and getAtt dont seem to show up with anything
+	    System.out.println("Received name: " + name);
+	    System.out.println("Received password: " + password);
+	    
+	    PageUser user = userService.authenticateUser(name, password);
+
+	    if (user != null) {
+	        try {
+	            // Store the user in session
+	            session.setAttribute("LoggedInUser", user);
+	            //so far this sysout is printing but my posting isnt working...
+	            System.out.println("User logged in, stored in session: " + user);
+	            
+	            resp.setStatus(HttpServletResponse.SC_OK); // 200 OK
+	            resp.setHeader("Location", req.getRequestURL().append("users/").append(user.getId()).toString());
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            resp.setStatus(HttpServletResponse.SC_BAD_REQUEST); // 400 Bad Req
+	        }
+	    } else {
+	        resp.setStatus(HttpServletResponse.SC_UNAUTHORIZED); // 401 Unauthorized
+	    }
+
+	    return user;
 	}
+	
+	
 }
