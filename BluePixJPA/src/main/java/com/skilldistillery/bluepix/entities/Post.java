@@ -1,6 +1,7 @@
 package com.skilldistillery.bluepix.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Post {
@@ -42,6 +44,9 @@ public class Post {
 	@ManyToOne
 	@JoinColumn(name="page_user_id")
 	private PageUser pageUser;
+	
+	@OneToMany(mappedBy ="post")
+	private List<Comment> PostComments;
 
 	public Post() {
 		super();
@@ -117,6 +122,14 @@ public class Post {
 		this.pageUser = pageUser;
 	}
 
+	public List<Comment> getPostComments() {
+		return PostComments;
+	}
+
+	public void setPostComments(List<Comment> postComments) {
+		PostComments = postComments;
+	}
+
 
 	public Post(int id, String title, String description, String imageUrl, LocalDateTime createdDate,
 			LocalDateTime lastUpdate, PageUser pageUser) {
@@ -151,7 +164,8 @@ public class Post {
 	@Override
 	public String toString() {
 		return "Post [id=" + id + ", title=" + title + ", description=" + description + ", imageUrl=" + imageUrl
-				+ ", createdDate=" + createdDate + ", lastUpdate=" + lastUpdate + ", pageUser=" + pageUser + "]";
+				+ ", createdDate=" + createdDate + ", lastUpdate=" + lastUpdate + ", pageUser=" + pageUser
+				+ ", PostComments=" + PostComments + "]";
 	}
 	
 	

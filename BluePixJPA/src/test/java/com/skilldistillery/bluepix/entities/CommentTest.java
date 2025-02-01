@@ -12,11 +12,11 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class PageUserTest {
+class CommentTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private PageUser pageUser;
-
+	private Comment comment;
+	
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
 		emf = Persistence.createEntityManagerFactory("BluePixJPA");
@@ -30,19 +30,24 @@ class PageUserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		pageUser = em.find(PageUser.class, 1);
+		comment = em.find(Comment.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		pageUser = null;
+		comment = null;
 		em.close();
 	}
 
 	@Test
-	void test_PageUser_mapping() {
-		assertNotNull(pageUser);
-		assertEquals("admin", pageUser.getName());
+	void test_Comment_basic_mapping() {
+		assertNotNull(comment);
+		assertEquals("Bogos Binted?", comment.getComments());
+	}
+	@Test
+	void test_Comment_mapping_to_Post() {
+		assertNotNull(comment.getPost());
+		assertTrue(comment.getPost().getId() == 1);
 	}
 
 }

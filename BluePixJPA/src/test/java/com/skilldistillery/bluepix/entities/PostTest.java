@@ -12,10 +12,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
-class PageUserTest {
+class PostTest {
 	private static EntityManagerFactory emf;
 	private EntityManager em;
-	private PageUser pageUser;
+	private Post post;
 
 	@BeforeAll
 	static void setUpBeforeClass() throws Exception {
@@ -30,19 +30,25 @@ class PageUserTest {
 	@BeforeEach
 	void setUp() throws Exception {
 		em = emf.createEntityManager();
-		pageUser = em.find(PageUser.class, 1);
+		post = em.find(Post.class, 1);
 	}
 
 	@AfterEach
 	void tearDown() throws Exception {
-		pageUser = null;
+		post = null;
 		em.close();
 	}
 
 	@Test
-	void test_PageUser_mapping() {
-		assertNotNull(pageUser);
-		assertEquals("admin", pageUser.getName());
+	void test_Post_basic_mapping() {
+		assertNotNull(post);
+		assertEquals("Photos Printed?", post.getTitle());
+	}
+	@Test
+	void test_Post_mapping_to_Comment() {
+		assertNotNull(post.getPostComments());
+		assertEquals("Bogos Binted?", post.getPostComments().getFirst().getComments());
+		assertTrue(post.getPostComments().size() > 0);
 	}
 
 }

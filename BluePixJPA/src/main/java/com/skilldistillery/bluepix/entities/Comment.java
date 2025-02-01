@@ -11,6 +11,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -30,6 +32,25 @@ public class Comment {
 	@Column(name = "last_update")
 	@UpdateTimestamp
 	private LocalDateTime lastUpdate;
+	
+	@ManyToOne
+	@JoinColumn(name = "post_id")
+	private Post post;
+//	@ManyToOne
+//	@JoinColumn(name="recipe_id")
+//	private Recipe recipe;
+//	
+//	@ManyToOne
+//	@JoinColumn(name = "in_reply_to_id")
+//	private RecipeComment parentComment;
+//	
+//	@OneToMany(mappedBy = "parentComment")
+//	private List<RecipeComment> subComments;
+//	
+//	@ManyToOne
+//	@JoinColumn(name="user_id")
+//	private User user;
+	
 
 	public Comment() {
 		super();
@@ -65,6 +86,14 @@ public class Comment {
 
 	public void setLastUpdate(LocalDateTime lastUpdate) {
 		this.lastUpdate = lastUpdate;
+	}
+
+	public Post getPost() {
+		return post;
+	}
+
+	public void setPost(Post post) {
+		this.post = post;
 	}
 
 	@Override
