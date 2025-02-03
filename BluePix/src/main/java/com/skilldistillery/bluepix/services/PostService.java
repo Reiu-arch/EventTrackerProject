@@ -9,6 +9,6 @@ public interface PostService {
 	List<Post> findAll();
 	Post findById(int postId);
 	Post create(Post newPost, int userId);
-	Post update(int postId, Post post, int userId);
-	boolean delete(int postId, int userId);
+	Post update(int postId, Post post);
+	boolean delete(int postId);
 }

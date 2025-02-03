@@ -9,7 +9,7 @@ window.addEventListener('load', function(e){
 
 function init(){
 		getPosts();
-
+		add();
 }
 
 function getPosts() {
@@ -67,7 +67,10 @@ function getPosts() {
 		}
 	}
 	
-		
-		//let title = document.createElement('h3');
-		//title.textContent = posts.title;
+	function add() {
+		document.displayForm.disp.addEventListener('click', function(event) {
+					event.preventDefault();
+					
+				});
+	}
 

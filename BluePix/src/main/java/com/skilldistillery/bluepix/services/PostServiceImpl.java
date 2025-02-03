@@ -46,17 +46,22 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Post update(int postId, Post post, int userId) {
-		Optional<Post> userOpt = postRepo.findById(postId);
-		Post updateUser = null;
-		if(userOpt.isPresent()) {
-			
+	public Post update(int postId, Post postData) {
+		Optional<Post> postOpt = postRepo.findById(postData.getId());
+		Post updatePost = postOpt.get();
+		if(updatePost == null) {
+			return postData;
 		}
-		return updateUser;
+		if(postData.getId() == updatePost.getId()) {
+			updatePost.setTitle(postData.getTitle());
+			updatePost.setDescription(postData.getDescription());
+			updatePost.setImageUrl(postData.getImageUrl());
+		}
+		return updatePost;
 	}
 
 	@Override
-	public boolean delete(int postId, int userId) {
+	public boolean delete(int postId) {
 		boolean deleted = false;
 		if(postRepo.existsById(postId)) {
 			postRepo.deleteById(postId);

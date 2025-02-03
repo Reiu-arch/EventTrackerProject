@@ -3,3 +3,12 @@
 body{
 	background-color: teal
 }
+
+.hoverText {
+  display: none;
+}
+
+.buttonHov:hover + .hoverText {
+  display: block;
+  color: black;
+}
