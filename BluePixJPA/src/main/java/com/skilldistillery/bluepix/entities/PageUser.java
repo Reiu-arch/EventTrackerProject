@@ -47,6 +47,9 @@ public class PageUser {
 	@JsonIgnoreProperties({"pageUser"})
 	@OneToMany(mappedBy="pageUser")
 	private List<Post> posts;
+	
+	@OneToMany(mappedBy = "user")
+	private List<Comment> Comments;
 
 	public PageUser() {
 		super();
@@ -123,8 +126,14 @@ public class PageUser {
 	public void setLastUpdate(LocalDateTime lastUpdate) {
 		this.lastUpdate = lastUpdate;
 	}
-	
-	
+
+	public List<Comment> getComments() {
+		return Comments;
+	}
+
+	public void setComments(List<Comment> comments) {
+		Comments = comments;
+	}
 
 	public PageUser(int id, String name, String email, String password, String biography, String pictureUrl,
 			LocalDateTime createDate, LocalDateTime lastUpdate, List<Post> posts) {

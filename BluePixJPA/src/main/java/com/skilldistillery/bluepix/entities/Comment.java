@@ -1,6 +1,7 @@
 package com.skilldistillery.bluepix.entities;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.annotations.CreationTimestamp;
@@ -13,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,23 +35,29 @@ public class Comment {
 	@UpdateTimestamp
 	private LocalDateTime lastUpdate;
 	
+	//connects the comment by the post Id
 	@ManyToOne
 	@JoinColumn(name = "post_id")
 	private Post post;
-//	@ManyToOne
-//	@JoinColumn(name="recipe_id")
-//	private Recipe recipe;
-//	
-//	@ManyToOne
-//	@JoinColumn(name = "in_reply_to_id")
-//	private RecipeComment parentComment;
-//	
-//	@OneToMany(mappedBy = "parentComment")
-//	private List<RecipeComment> subComments;
-//	
-//	@ManyToOne
-//	@JoinColumn(name="user_id")
-//	private User user;
+
+	//creates an Id of the top most comment (I know it as the 
+	//the parent comment)
+	@ManyToOne
+	@JoinColumn(name = "parent_comment_id")
+	private Comment parentComment;
+	
+	
+	//gives a sub-comment an Id in the post_comment table and assigns 
+	//it to a parent comment (unsure at the moment of what will occur when a sub comment 
+	//is connected to another sub comment, will it accordion?
+	@OneToMany(mappedBy = "parentComment")
+	private List<Comment> subComments;
+	
+	
+	//connects the comment to the user whom commented it
+	@ManyToOne
+	@JoinColumn(name="page_user_id")
+	private PageUser user;
 	
 
 	public Comment() {
@@ -94,6 +102,30 @@ public class Comment {
 
 	public void setPost(Post post) {
 		this.post = post;
+	}
+
+	public Comment getParentComment() {
+		return parentComment;
+	}
+
+	public void setParentComment(Comment parentComment) {
+		this.parentComment = parentComment;
+	}
+
+	public List<Comment> getSubComments() {
+		return subComments;
+	}
+
+	public void setSubComments(List<Comment> subComments) {
+		this.subComments = subComments;
+	}
+
+	public PageUser getUser() {
+		return user;
+	}
+
+	public void setUser(PageUser user) {
+		this.user = user;
 	}
 
 	@Override

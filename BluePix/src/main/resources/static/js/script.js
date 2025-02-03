@@ -60,6 +60,7 @@ function getPosts() {
 			let image = document.createElement('img');
 			image.id = 'imageUrl';
 			image.src = posts[i].imageUrl;
+			image.style = "width:400px;height:300px";
 			postDiv.appendChild(image);
 			}
 			postDiv.appendChild(document.createElement('hr'));
