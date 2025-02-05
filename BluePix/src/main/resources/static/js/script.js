@@ -9,7 +9,7 @@ window.addEventListener('load', function(e) {
 
 function init() {
 	getPosts();
-	addDisplay();
+	add();
 }
 
 function getPosts() {
@@ -67,44 +67,77 @@ function postToDiv(posts) {
 	}
 }
 
-function addDisplay() {
+function add() {
 	document.displayForm.disp.addEventListener('click', function(event) {
 		event.preventDefault();
+	//add
 		let newPostDisplay = document.getElementById('newPostDisplay');
-		newPostDisplay.textContent = '';
-
+	//mod
+		newPostDisplay.textContent = ''; 
+		//add
 		let title = document.createElement('input');
+		//mod
 		title.type = 'text';
 		title.name = 'newPostTitle';
 		title.placeholder = 'enter title here';
-
+		//append
 		newPostDisplay.appendChild(title);
 		newPostDisplay.appendChild(document.createElement('br'));
-
+		//add
 		let description = document.createElement('input');
 		description.type = 'textarea';
 		description.name = 'newPostDescription';
 		description.placeholder = 'enter description here';
-
 		newPostDisplay.appendChild(description);
 		newPostDisplay.appendChild(document.createElement('br'));
-
+		//mod
 		let newImage = document.createElement('input');
 		newImage.type = 'text';
 		newImage.name = 'newImageUrl';
 		newImage.placeholder = 'paste image Url';
-
 		newPostDisplay.appendChild(newImage);
 		newPostDisplay.appendChild(document.createElement('br'));
-
+		//append
 		let displayPostSubmit = document.createElement('button');
 		displayPostSubmit.name = 'addPostButton';
-		displayPostSubmit.class = 'btn btn-dark';
+		displayPostSubmit.classList.add('btn', 'btn-dark'); // Correct className usage
 		displayPostSubmit.textContent = 'submit';
-
+	//append
 		newPostDisplay.appendChild(displayPostSubmit);
 
+		//added a new function to grab the info right after hitting submit
+		displayPostSubmit.addEventListener('click', function(event) {
+			event.preventDefault();
 
+			let title = newPostDisplay.querySelector('[name="newPostTitle"]').value;
+			let description = newPostDisplay.querySelector('[name="newPostDescription"]').value;
+			let imageUrl = newPostDisplay.querySelector('[name="newImageUrl"]').value;
+
+			console.log('title: ' + title + ' description: ' + description + ' imageUrl: ' + imageUrl);
+
+			let xhr = new XMLHttpRequest();
+			
+			let post = {
+							'title': title,
+							'description': description,
+							'imageUrl': imageUrl
+							
+						};
+						xhr.open('POST', 'api/posts', true);
+									xhr.setRequestHeader('Content-Type', 'application/json');
+
+									xhr.onreadystatechange = function() {
+										if (xhr.readyState === 4) {
+											if (xhr.status === 201) {
+												console.log('New Film Added');
+											} else {
+												console.error('Error: ' + xhr.status);
+											}
+										}
+									};
+									xhr.send(JSON.stringify(post));
+				
+		});
 	});
 }
 

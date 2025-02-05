@@ -7,6 +7,7 @@ import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -48,8 +49,9 @@ public class PageUser {
 	@OneToMany(mappedBy="pageUser")
 	private List<Post> posts;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "user")
-	private List<Comment> Comments;
+	private List<Comment> comments;
 
 	public PageUser() {
 		super();
@@ -128,11 +130,11 @@ public class PageUser {
 	}
 
 	public List<Comment> getComments() {
-		return Comments;
+		return comments;
 	}
 
 	public void setComments(List<Comment> comments) {
-		Comments = comments;
+		comments = comments;
 	}
 
 	public PageUser(int id, String name, String email, String password, String biography, String pictureUrl,

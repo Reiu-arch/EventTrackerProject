@@ -7,6 +7,8 @@ import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -50,6 +52,7 @@ public class Comment {
 	//gives a sub-comment an Id in the post_comment table and assigns 
 	//it to a parent comment (unsure at the moment of what will occur when a sub comment 
 	//is connected to another sub comment, will it accordion?
+	@JsonIgnore
 	@OneToMany(mappedBy = "parentComment")
 	private List<Comment> subComments;
 	

@@ -43,14 +43,6 @@ public class PostController {
 	@PostMapping(path = { "posts", "posts/" })
 	public Post createPost(@RequestBody Post post, HttpServletResponse resp, HttpServletRequest req, HttpSession session) {
 		try {
-//			PageUser postingUser = (PageUser)session.getAttribute("LoggedInUser");
-//			System.out.println("=======================================================");
-//			System.out.println("=======================================================");
-//			System.out.println(postingUser);
-//			System.out.println("=======================================================");
-//			System.out.println("=======================================================");
-			//informed that session will no  longer be used, hard code a user for now and put through the creation. 
-			//Anonymous user created for this purpose.
 			post = postService.create(post, 4);
 			resp.setStatus(HttpServletResponse.SC_CREATED);// 201
 			resp.setHeader("Location", req.getRequestURL().append("/").append(post.getId()).toString());

@@ -1,14 +1,84 @@
 @charset "UTF-8";
 
-body{
-	background-color: teal
+body {
+  background-color: teal;
 }
+
+
+.row.align-items-start {
+  background-color: #006666; 
+}
+
+
+#newPostButton {
+  transition: all 0.3s ease;
+}
+
+#newPostButton:hover {
+  background-color: #007bff;  
+  color: white;               
+  transform: scale(1.1);      
+}
+
 
 .hoverText {
   display: none;
+  color: white;            
+  position: absolute;
+  top: 50px;                 
+  left: 50%;                 
+  transform: translateX(-50%);
+  font-size: 14px;
+  background-color: rgba(0, 0, 0, 0.7); 
+  padding: 5px 10px;
+  border-radius: 5px;
 }
 
 .buttonHov:hover + .hoverText {
   display: block;
-  color: black;
+}
+
+
+.side-col-color {
+  background-color: #f4f4f4;  
+  padding: 15px;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.pop-out {
+  position: relative;
+  z-index: 1;
+  border: 2px solid #3498db;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.pop-out::before {
+  content: "";
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  right: -6px;
+  bottom: -6px;
+  border: 2px solid #2c3e50; 
+  z-index: -1;
+}
+
+
+.col-md-2 {
+  background-color: teal; 
+}
+
+
+.p-3 {
+  padding: 1rem;
+}
+
+
+form {
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #fff;
 }

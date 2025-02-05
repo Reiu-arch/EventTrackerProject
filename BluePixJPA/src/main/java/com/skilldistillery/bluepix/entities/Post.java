@@ -7,6 +7,7 @@ import java.util.Objects;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
@@ -45,8 +46,9 @@ public class Post {
 	@JoinColumn(name="page_user_id")
 	private PageUser pageUser;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy ="post")
-	private List<Comment> PostComments;
+	private List<Comment> postComments;
 
 	public Post() {
 		super();
@@ -123,11 +125,11 @@ public class Post {
 	}
 
 	public List<Comment> getPostComments() {
-		return PostComments;
+		return postComments;
 	}
 
 	public void setPostComments(List<Comment> postComments) {
-		PostComments = postComments;
+		postComments = postComments;
 	}
 
 
@@ -165,7 +167,7 @@ public class Post {
 	public String toString() {
 		return "Post [id=" + id + ", title=" + title + ", description=" + description + ", imageUrl=" + imageUrl
 				+ ", createdDate=" + createdDate + ", lastUpdate=" + lastUpdate + ", pageUser=" + pageUser
-				+ ", PostComments=" + PostComments + "]";
+				+ ", PostComments=" + postComments + "]";
 	}
 	
 	

@@ -193,7 +193,6 @@ USE `socialdb`;
 INSERT INTO `post` (`id`, `title`, `description`, `image_url`, `create_date`, `last_update`, `page_user_id`) VALUES (1, 'Photos Printed?', 'Hey, just wondering if you got your photos printed?', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTi9Hfc1iTzPNdEYFOmp-FkD2L955QVCIKJbUmiHyi-ocBSW7be_Kr4bJZF_GhHRxJ7Bdc&usqp=CAU', '2025-01-26', '2025-01-26', 1);
 INSERT INTO `post` (`id`, `title`, `description`, `image_url`, `create_date`, `last_update`, `page_user_id`) VALUES (2, 'Why did it come out Bad?', 'I made from alfredo and I substituted the sauce with chocolate syrup and cheese flavoring. Why does it taste bad???', NULL, '2025-01-27', '2025-01-27', 2);
 INSERT INTO `post` (`id`, `title`, `description`, `image_url`, `create_date`, `last_update`, `page_user_id`) VALUES (3, 'Cave Crawling', 'I just felt something scrurry acoss my feet. Its super dark in here, I dont know where I am. Someone help.', 'https://images.unsplash.com/photo-1517239320384-e08ad2c24a3e?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', '2025-02-01', '2025-02-01', 3);
-INSERT INTO `post` (`id`, `title`, `description`, `image_url`, `create_date`, `last_update`, `page_user_id`) VALUES (4, 'Noogit', 'I ate a golden noogit', 'https://www.amish365.com/wp-content/uploads/2017/03/nugget.jpg', '2025-02-02', '2025-02-02', 4);
 
 COMMIT;
 
