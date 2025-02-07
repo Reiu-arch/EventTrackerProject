@@ -47,7 +47,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public Post update(int postId, Post postData) {
-		Optional<Post> postOpt = postRepo.findById(postData.getId());
+		Optional<Post> postOpt = postRepo.findById(postId);
 		Post updatePost = postOpt.get();
 		if(updatePost == null) {
 			return postData;
