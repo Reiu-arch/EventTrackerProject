@@ -1,7 +1,52 @@
-<p>home works!</p>
-<div *ngFor="let post of posts">
-  {{post.title}}<br>
-  {{post.description}}<br>
-  <img src="{{post.imageUrl}}">
-  <hr>
+
+<!-- This is the nav bar area
+ TODOS: implement a ---- search bar --- User tab --- login --- view profile --- -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light custom-navbar">
+  <a class="navbar-brand"><img class="logo" src="https://scontent-den2-1.xx.fbcdn.net/v/t39.30808-6/474901484_122101672568761091_3279456863966214516_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_ohc=jE-l8LixRccQ7kNvgHlZKWG&_nc_oc=Adg037gwjsDBicSu21Jsibkj4pDVJ1jCoT5fnQ1spizqeqfuqSJTXpf-mIV0V5-TpiJSj6X4u0TaWstMva3_XLQM&_nc_zt=23&_nc_ht=scontent-den2-1.xx&_nc_gid=AdJ1XL01e4wfD1u59HyaWbu&oh=00_AYChSVdcOLd7VatAPxWH4Se-gRgJq_gBBuT7XycApauvPA&oe=67AC7E05"></a>
+
+  <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="navbar-brand">Blue Pix</a>
+      </li>
+
+    </ul>
+  </div>
+</nav>
+
+<!-- This is the three column section -->
+<div id="newPostDiv">
+  <form id="newPostDisplay"></form>
 </div>
+
+<hr>
+<div class="row">
+  <!-- Left Side Column -->
+  <div class="col-md-2 col-12 side-col-color p-3">
+    <!-- IMPORTANT pad out category drop down -->
+  </div>
+
+  <!-- Center Column (Main Content) -->
+  <div class="col-md-8 col-12 p-4 border border-secondary shadow-lg pop-out">
+
+    <!-- logic for printing out posts -->
+    <div *ngFor="let post of posts">
+      {{post.title}}<br>
+      {{post.description}}<br>
+      <img src="{{post.imageUrl}}">
+      <hr>
+    </div>
+
+  </div>
+
+  <!-- Right Side Column -->
+  <div class="col-md-2 col-12 side-col-color p-3">
+    <!-- IMPORTANT pad out for user drop down -->
+  </div>
+</div>
+
+
+
+
+

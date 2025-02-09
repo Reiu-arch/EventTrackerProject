@@ -1,7 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Jaini&display=swap');
+/* i was not aware of this but you can import custom css items from other locations
+I wonder if it works with other css customizers other than fonts... */
 img {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 5px;
   width: 150px;
   height: 150px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
+
+.custom-navbar {
+  background-color: black !important;
+  padding: 10px 20px;
+}
+
+.custom-navbar .navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.custom-navbar .navbar-brand,
+.custom-navbar .nav-item a {
+  color: #D9D9D9 !important;
+  text-decoration: none;
+}
+
+
+.navbar-brand {
+  font-family: 'Jaini', cursive;
+  font-size: 35px;
 }
