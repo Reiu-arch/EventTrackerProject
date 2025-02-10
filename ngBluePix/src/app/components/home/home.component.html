@@ -61,16 +61,49 @@
         </div>
     <hr>
     <!-- logic for printing out posts -->
-    <div *ngFor="let post of posts">
-      <div class="container border border-secondary shadow-lg pop-out">
-      <h4>{{post.title}}</h4>
-      {{post.description}}<br>
-      <img *ngIf="post.imageUrl" [src]="post.imageUrl">
-    </div>
-      <br>
-    </div>
+     <div *ngIf="!showEditngForm && !editPost">
 
-  </div>
+       <div *ngFor="let post of posts">
+         <div class="container border border-secondary shadow-lg pop-out">
+           <div id="seperatingTitleFromEditButton">
+             <h4>{{post.title}}</h4>
+             <!-- show edit button -->
+             <button type="button" id="editPostButton" class="btn"
+             (click)="setEditPost(post)">Edit</button>
+            </div>
+            {{post.description}}<br>
+            <img *ngIf="post.imageUrl" [src]="post.imageUrl">
+
+          </div>
+          <br>
+        </div>
+      </div>
+
+
+
+      <div *ngIf="showEditngForm && editPost" class="edit-post-container">
+        <form class="add-post-form">
+          <input type="text" name="title" [(ngModel)]="editPost.title" placeholder="Enter Post Title" class="form-input" />
+
+          <textarea name="description" [(ngModel)]="editPost.description" placeholder="Enter Post Description" class="form-textarea"></textarea>
+
+          <input type="text" name="imageUrl" [(ngModel)]="editPost.imageUrl" placeholder="Enter Image URL (Optional)" class="form-input" />
+
+          <button (click)="updatePost(editPost)" class="btn btn-outline-dark submit-button">
+            Save
+          </button>
+
+          <button (click)="editPost = null; showEditngForm = false" class="btn btn-outline-danger submit-button">
+            Cancel
+          </button>
+
+          <button (click)="deletePost(editPost.id)" class="btn btn-outline-danger submit-button">
+            Delete
+          </button>
+        </form>
+      </div>
+      <br><br><br><br><br>
+
 
   <!-- Right Side Column -->
   <div class="col-md-2 col-12 side-col-color p-3">

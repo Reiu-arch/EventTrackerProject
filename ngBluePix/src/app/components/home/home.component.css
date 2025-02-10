@@ -45,6 +45,11 @@ I wonder if it works with other css customizers other than fonts... */
 .row{
   background-color: #008080;
 }
+body {
+  background-color: #008080 !important;
+  display: block;
+  height: 100vh;
+}
 .post-header {
   display: flex;
   justify-content: space-between;
@@ -62,6 +67,16 @@ I wonder if it works with other css customizers other than fonts... */
   align-items: center;
   justify-content: center;
 }
+#seperatingTitleFromEditButton{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+#editPostButton {
+color: grey;
+}
+
 .search-container {
   position: relative;
 }
@@ -84,6 +99,41 @@ I wonder if it works with other css customizers other than fonts... */
 
 .add-post-container {
   background-color:  #D9D9D9;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.submit-button:hover {
+  background-color: black;
+}
+
+.edit-post-container {
+  background-color: #D9D9D9;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

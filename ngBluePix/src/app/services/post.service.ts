@@ -51,6 +51,15 @@ export class PostService {
   );
 }
 
-
+destroy(postId: number) : Observable<void> {
+  return this.http.delete<void>(`${this.url}/${postId}`).pipe(
+    catchError((err: any) => {
+      console.log(err);
+      return throwError(
+        () => new Error('todoService.delete(): error deleting: ' + err)
+      );
+    })
+  );
+}
 
 }

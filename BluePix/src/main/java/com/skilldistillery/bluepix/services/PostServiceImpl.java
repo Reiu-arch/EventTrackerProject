@@ -56,6 +56,7 @@ public class PostServiceImpl implements PostService {
 			updatePost.setTitle(postData.getTitle());
 			updatePost.setDescription(postData.getDescription());
 			updatePost.setImageUrl(postData.getImageUrl());
+			postRepo.saveAndFlush(updatePost);
 		}
 		return updatePost;
 	}

@@ -31,6 +31,14 @@ export class HomeComponent implements OnInit{
 
   showAddingPost: boolean = false;
 
+  editPost: Post | null = null;
+
+  showEditngForm: boolean = false;
+
+  setEditPost(post: Post) {
+    this.editPost = { ...post };
+    this.showEditngForm = true;
+  }
 
   reload(){
     this.postService.index().subscribe( {
@@ -56,5 +64,36 @@ export class HomeComponent implements OnInit{
       }
     }
   );
+  }
+
+  updatePost(post: Post) {
+    console.log(post);
+    this.postService.update(post).subscribe( {
+      next: (updatingTodo) => {
+        this.reload();
+        this.editPost = null;
+        this.showEditngForm = false;
+      },
+      error: (fail) => {
+        console.log('homeComponent.updatePost: failed to update.');
+        console.log(fail);
+      }
+    }
+  );
+  }
+
+  deletePost(postId: number){
+    console.log(postId);
+    this.postService.destroy(postId).subscribe({
+      next: () => {
+        this.reload();
+        this.editPost = null;
+        this.showEditngForm = false;
+      },
+      error: (fail) => {
+        console.log('homeComponent.deletePost: failed to delete the Post.')
+        console.log(fail);
+      }
+    })
   }
 }
