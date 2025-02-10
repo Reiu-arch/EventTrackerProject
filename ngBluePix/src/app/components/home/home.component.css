@@ -1,12 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Jaini&display=swap');
 /* i was not aware of this but you can import custom css items from other locations
 I wonder if it works with other css customizers other than fonts... */
-img {
+.container img {
   border: 1px solid #ddd;
   border-radius: 4px;
   padding: 5px;
   width: 150px;
   height: 150px;
+}
+.container{
+  border-radius: 8px;
+  padding: 15px;
 }
 
 .logo {
@@ -36,4 +40,79 @@ img {
 .navbar-brand {
   font-family: 'Jaini', cursive;
   font-size: 35px;
+}
+
+.row{
+  background-color: #008080;
+}
+.post-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  font-family: 'Jaini', cursive;
+  font-size: 35px;
+}
+#newPostButton {
+  font-size: 40px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-container {
+  position: relative;
+}
+
+.search-input {
+  height: 40px;
+  border-radius: 30px;
+  padding-left: 35px;
+  border: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  color: #888;
+}
+
+.add-post-container {
+  background-color:  #D9D9D9;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.form-textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 5px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.submit-button:hover {
+  background-color: black;
 }

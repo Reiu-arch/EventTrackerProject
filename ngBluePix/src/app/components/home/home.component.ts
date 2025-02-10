@@ -27,6 +27,10 @@ export class HomeComponent implements OnInit{
 
   posts: Post[] = [];
 
+  newPost: Post = new Post();
+
+  showAddingPost: boolean = false;
+
 
   reload(){
     this.postService.index().subscribe( {
@@ -36,5 +40,21 @@ export class HomeComponent implements OnInit{
       error: (fail) => {
         console.log('TodoListComponent.reload: failed to load todos.')}
     } );
+  }
+
+  addingPost(newPosting: Post){
+    this.postService.create(newPosting).subscribe( {
+      next: (createdPost) => {
+        this.newPost = createdPost;
+        this.showAddingPost = false;
+        this.reload();
+        this.newPost = new Post();
+      },
+      error: (fail) => {
+        console.log('homeComponent.addingPost: failed to add a new Post.');
+        console.log(fail);
+      }
+    }
+  );
   }
 }
